@@ -10,36 +10,22 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <vertx.version>4.0.0</vertx.version>
+    <vertx.version>3.9.9-SNAPSHOT</vertx.version>
     <main.verticle>io.vertx.starter.MainVerticle</main.verticle>
   </properties>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-stack-depchain</artifactId>
-        <version>${vertx.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+
 
   <dependencies>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-core</artifactId>
+      <version>${vertx.version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.13.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-unit</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -86,6 +72,17 @@
           </execution>
         </executions>
       </plugin>
+      
+      <plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-surefire-plugin</artifactId>
+  <version>2.12.4</version>
+     <configuration>
+        <verbose>true</verbose>
+        <fork>true</fork>
+        <argLine>-Xmx96m -XX:OnOutOfMemoryError="kill -9 %p"</argLine>
+    </configuration>
+	</plugin>
 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
